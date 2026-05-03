@@ -407,7 +407,12 @@ fn generate_user(
         // town_area に全角数字（丁目相当）または半角数字が含まれる場合はそのまま使用し、
         // それ以外はランダムな番地を末尾に付与する。
         town_area_name: {
-            let ta = &addr.town_area;
+            let ta: String = if addr.town_area.contains('、') {
+                let parts: Vec<&str> = addr.town_area.split('、').collect();
+                parts[rng.gen_range(0..parts.len())].to_string()  // ランダムに1つ選択
+            } else {
+                addr.town_area.clone()
+            };
             let has_number = ta.chars().any(|c| c.is_ascii_digit())
                 || ta.chars().any(|c| ('０'..='９').contains(&c))
                 || ta.contains('丁');
