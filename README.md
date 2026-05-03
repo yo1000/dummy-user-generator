@@ -6,6 +6,13 @@ Rayon による **マルチスレッド並列生成 & 並列 CSV 書き込み** 
 > [!NOTE]
 > This software is based on AI-generated code with additional implementation.
 
+## クイックスタート
+
+```bash
+cargo build --release
+./target/release/user_generator --count 100000
+```
+
 ---
 
 ## ディレクトリ構成
