@@ -1,4 +1,4 @@
-user_generator
+dummy-user-generator
 ================================================================================
 
 CLI tool for rapidly generating random lists of Japanese users.
@@ -16,7 +16,7 @@ mkdir -p /tmp/out
 docker run --rm \
 -v /tmp/out:/var/output \
 -e USERGEN__COUNT=10000 \
-ghcr.io/yo1000/user-generator:latest
+ghcr.io/yo1000/dummy-user-generator:latest
 
 ls -l /tmp/out
 less /tmp/out/users.csv
@@ -31,7 +31,7 @@ Build and Run
 cargo build --release
 
 # Run
-./target/release/user_generator --count 100000
+./target/release/usergen --count 100000
 ```
 
 
@@ -41,8 +41,8 @@ Docker build and Run
 ```bash
 # Build
 cargo build --release
-docker build --tag user_generator \
---build-arg BIN=./target/release/user_generator \
+docker build --tag dummy-user-generator \
+--build-arg BIN=./target/release/usergen \
 --build-arg DATA_DIR=./data .
 
 # Run
@@ -50,14 +50,14 @@ mkdir -p /tmp/out
 docker run --rm \
 -v /tmp/out:/var/output \
 -e USERGEN__COUNT=10000 \
-user_generator
+dummy-user-generator
 ```
 
 
 --------------------------------------------------------------------------------
 
 
-user_generator
+dummy-user-generator
 ================================================================================
 
 ランダムな日本人ユーザーリストを高速生成する CLI ツールです。  
@@ -68,7 +68,7 @@ Rayon による **マルチスレッド並列生成 & 並列 CSV 書き込み** 
 --------------------------------------------------------------------------------
 
 ```
-user_generator/
+dummy-user-generator/
 ├── Cargo.toml
 ├── src/
 │   └── main.rs
@@ -162,7 +162,7 @@ ZIP 内の CSV の各列：
 # リリースビルド（最速）
 cargo build --release
 
-# バイナリは target/release/user_generator に生成される
+# バイナリは target/release/usergen に生成される
 ```
 
 
@@ -171,13 +171,13 @@ cargo build --release
 
 ```bash
 # 基本（デフォルト: 1000件、data/ ディレクトリのファイルを使用）
-./target/release/user_generator
+./target/release/usergen
 
 # 件数を指定
-./target/release/user_generator --count 1000000
+./target/release/usergen --count 1000000
 
 # ファイルパスをすべて明示指定
-./target/release/user_generator \
+./target/release/usergen \
   --count             5000000 \
   --family-name       data/family_name.csv \
   --given-name-male   data/given_name_male.csv \

@@ -38,8 +38,8 @@ jobs:
       - name: Upload release artifact
         uses: actions/upload-artifact@v7
         with:
-          name: user_generator
-          path: target/${{ matrix.build_target }}/user_generator
+          name: usergen
+          path: target/${{ matrix.build_target }}/usergen
 
   container:
     if: contains(github.ref, 'refs/tags/')
@@ -54,7 +54,7 @@ jobs:
       - name: Download release artifact
         uses: actions/download-artifact@v8
         with:
-          name: user_generator
+          name: usergen
           path: target/${{ matrix.build_target }}
 
       - name: Login to GitHub Container Registry
@@ -66,18 +66,18 @@ jobs:
       - name: Build
         run: |
           ls -al target/${{ matrix.build_target }}
-          chmod +x ./target/${{ matrix.build_target }}/user_generator
+          chmod +x ./target/${{ matrix.build_target }}/usergen
           
           VERSION=$(echo '${{ github.ref }}' | sed -e 's/refs\/tags\///g' | sed -e 's/refs\/heads\///g')
           
           docker build \
-            -t yo1000/user-generator:$VERSION \
-            --build-arg BIN=./target/${{ matrix.build_target }}/user_generator \
+            -t yo1000/dummy-user-generator:$VERSION \
+            --build-arg BIN=./target/${{ matrix.build_target }}/usergen \
             --build-arg DATA_DIR=./data .
           docker image ls
           
-          docker tag yo1000/user-generator:$VERSION ghcr.io/yo1000/user-generator:$VERSION
-          docker tag yo1000/user-generator:$VERSION ghcr.io/yo1000/user-generator:latest
+          docker tag yo1000/dummy-user-generator:$VERSION ghcr.io/yo1000/dummy-user-generator:$VERSION
+          docker tag yo1000/dummy-user-generator:$VERSION ghcr.io/yo1000/dummy-user-generator:latest
           
-          docker push ghcr.io/yo1000/user-generator:$VERSION
-          docker push ghcr.io/yo1000/user-generator:latest
+          docker push ghcr.io/yo1000/dummy-user-generator:$VERSION
+          docker push ghcr.io/yo1000/dummy-user-generator:latest

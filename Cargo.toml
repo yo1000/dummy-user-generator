@@ -1,10 +1,10 @@
 [package]
-name = "user_generator"
+name = "dummy-user-generator"
 version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "user_generator"
+name = "usergen"
 path = "src/main.rs"
 
 [dependencies]

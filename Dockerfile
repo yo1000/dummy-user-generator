@@ -3,7 +3,7 @@ FROM debian:bookworm-slim
 ARG BIN
 ARG DATA_DIR
 
-COPY $BIN /usr/local/bin/user_generator
+COPY $BIN /usr/local/bin/usergen
 COPY $DATA_DIR /var/data
 
 ENV USERGEN__COUNT="1000"
@@ -16,7 +16,7 @@ ENV USERGEN__OUTPUT_DIR="/var/output"
 ENV USERGEN__CHUNK_SIZE="1000000"
 ENV USERGEN__THREADS="0"
 
-CMD ["sh", "-c", "user_generator \
+CMD ["sh", "-c", "usergen \
   --count               \"${USERGEN__COUNT}\" \
   --family-name         \"${USERGEN__FAMILY_NAME}\" \
   --given-name-male     \"${USERGEN__GIVEN_NAME_MALE}\" \
