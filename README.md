@@ -2,7 +2,11 @@ dummy-user-generator
 ================================================================================
 
 CLI tool for rapidly generating random lists of Japanese users.
-Supports multi-threading parallel generation & parallel CSV writing using Rayon.
+Supports multi-threading parallel generation and parallel CSV writing.
+
+It can generate up to 10 million records at a time,
+but as this requires 1.5 to 2 GB of disk space,
+please adjust the number of records to be generated accordingly.
 
 > [!NOTE]
 > This software is based on AI-generated code with additional implementation.
@@ -31,7 +35,7 @@ Build and Run
 cargo build --release
 
 # Run
-./target/release/usergen --count 100000
+./target/release/usergen --count 10000
 ```
 
 
